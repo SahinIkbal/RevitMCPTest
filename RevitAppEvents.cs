@@ -1,6 +1,7 @@
-﻿using Autodesk.Revit.UI;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using System;
+using System.IO.Pipes;
 
 namespace RevitMCPTest
 {
@@ -10,7 +11,7 @@ namespace RevitMCPTest
         public void Execute(UIApplication app)
         {
             // Example: Show a simple TaskDialog
-            TaskDialog.Show("MCP External Event", "External Event Executed!");
+            TaskDialog.Show("MCP External Event", PipeServer.MyMessage);
         }
 
         public string GetName()
@@ -34,9 +35,9 @@ namespace RevitMCPTest
             return _externalEvent;
         }
 
-        public static void Raise()
+        public static ExternalEventRequest Raise()
         {
-            GetOrCreateExternalEvent().Raise();
+           return GetOrCreateExternalEvent().Raise();
         }
     }
 
@@ -45,6 +46,7 @@ namespace RevitMCPTest
     {
         public Result OnStartup(UIControlledApplication application)
         {
+            Task.Run(PipeServer.NamedPipeServer);
             // Initialize the external event
             MCPExternalEvent.GetOrCreateExternalEvent();
             return Result.Succeeded;

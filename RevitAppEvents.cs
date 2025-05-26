@@ -39,4 +39,21 @@ namespace RevitMCPTest
             GetOrCreateExternalEvent().Raise();
         }
     }
+
+    // Application class to initialize the external event on Revit startup
+    public class App : IExternalApplication
+    {
+        public Result OnStartup(UIControlledApplication application)
+        {
+            // Initialize the external event
+            MCPExternalEvent.GetOrCreateExternalEvent();
+            return Result.Succeeded;
+        }
+
+        public Result OnShutdown(UIControlledApplication application)
+        {
+            // Clean up resources if necessary
+            return Result.Succeeded;
+        }
+    }
 }

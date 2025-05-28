@@ -1,7 +1,8 @@
 <RevitAddIns>
 	<AddIn Type="Application">
 		<Name>RevitMCPTest</Name>
-		<Assembly>C:\Users\Sahin\source\repos\RevitMCPTest\bin\Debug\net8.0\RevitMCPTest.dll</Assembly>
+		<!-- IMPORTANT: Update this path to the absolute path of your compiled RevitMCPTest.dll -->
+		<Assembly>C:\Path\To\Your\Project\RevitMCPTest\bin\Debug\net8.0\RevitMCPTest.dll</Assembly>
 		<AddInId>3c478521-32c4-46b1-966b-9e3327260a13</AddInId>
 		<FullClassName>RevitMCPTest.App</FullClassName>
 		<VendorId>USER</VendorId>
